@@ -8,10 +8,9 @@
                maximum-scale=1.0,
                user-scalable=no">
 
-<title>Outdoor Thermometer</title>
+<title>Air & Temperature Monitor</title>
 
 <style>
-
 * {
     box-sizing: border-box;
 }
@@ -20,15 +19,8 @@ body {
     margin: 0;
     min-height: 100vh;
     background:
-        radial-gradient(
-            circle at 50% 20%,
-            #24364d 0%,
-            #0b121c 45%,
-            #05080d 100%
-        );
-
+        radial-gradient(circle at 50% 0%, #263b52, #080d14 55%);
     color: white;
-
     font-family:
         -apple-system,
         BlinkMacSystemFont,
@@ -37,247 +29,200 @@ body {
 }
 
 .app {
-    min-height: 100vh;
-
     width: 100%;
     max-width: 430px;
-
     margin: auto;
+    padding: 30px 18px 40px;
+}
 
-    padding:
-        32px 22px 40px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.header {
+    text-align: center;
 }
 
 .title {
-    font-size: 21px;
-    font-weight: 700;
-
+    font-size: 22px;
+    font-weight: 800;
     letter-spacing: 2px;
-
-    margin-top: 5px;
 }
 
 .status {
     margin-top: 7px;
-
+    color: #8090a3;
     font-size: 12px;
-
-    color: #8291a5;
 }
 
-/* 현재 온도 */
+/* 온도 */
+
+.temperature-card {
+    margin-top: 25px;
+    padding: 25px 20px;
+    border-radius: 24px;
+    background: rgba(17, 28, 41, .9);
+    border: 1px solid #29394d;
+    text-align: center;
+}
+
+.temp-label {
+    color: #8493a6;
+    font-size: 13px;
+}
 
 .temperature {
-    margin-top: 42px;
-
-    font-size: 78px;
-
-    line-height: 1;
-
+    margin-top: 10px;
+    font-size: 68px;
     font-weight: 700;
-
-    letter-spacing: -4px;
-
-    text-shadow:
-        0 0 25px rgba(255,255,255,0.08);
+    letter-spacing: -3px;
 }
 
 .degree {
-    font-size: 28px;
-
-    letter-spacing: 0;
-
+    font-size: 27px;
     vertical-align: top;
-
-    margin-left: 5px;
 }
 
 .condition {
-    margin-top: 14px;
-
-    font-size: 18px;
-
-    color: #d9e1eb;
+    margin-top: 5px;
+    font-size: 17px;
 }
 
-/* 온도계 */
-
-.thermometer {
-    position: relative;
-
-    width: 72px;
-    height: 310px;
-
-    margin-top: 35px;
-
-    border-radius: 40px;
-
-    background: #111a26;
-
-    border:
-        2px solid #2d3a4c;
-
+.temp-gauge {
+    height: 12px;
+    margin-top: 20px;
+    background: #1a2635;
+    border-radius: 20px;
     overflow: hidden;
-
-    box-shadow:
-        inset 0 0 20px rgba(0,0,0,.45),
-        0 10px 30px rgba(0,0,0,.25);
 }
 
-.mercury {
-    position: absolute;
-
-    bottom: 0;
-    left: 0;
-
-    width: 100%;
-
-    height: 0%;
-
-    border-radius: 40px;
-
+.temp-bar {
+    height: 100%;
+    width: 0%;
+    border-radius: 20px;
     background:
         linear-gradient(
-            to top,
-            #269cff 0%,
-            #40dfff 30%,
-            #ffe45c 65%,
-            #ff4c4c 100%
+            90deg,
+            #249cff,
+            #48dfff,
+            #ffe45a,
+            #ff4d4d
         );
-
-    transition:
-        height 1.2s ease;
+    transition: width 1s ease;
 }
 
-.glow {
-    position: absolute;
-
-    left: 8px;
-    right: 8px;
-
-    bottom: 8px;
-
-    height: 40%;
-
-    border-radius: 30px;
-
-    background:
-        linear-gradient(
-            to top,
-            rgba(255,255,255,.18),
-            transparent
-        );
-
-    pointer-events: none;
-}
-
-/* 눈금 */
-
-.scale {
-    width: 100%;
-
-    max-width: 360px;
-
+.temp-scale {
     display: flex;
+    justify-content: space-between;
+    margin-top: 7px;
+    color: #728195;
+    font-size: 10px;
+}
 
-    justify-content:
-        space-between;
+/* 공기질 */
 
-    margin-top: 12px;
+.section-title {
+    margin: 28px 3px 12px;
+    font-size: 15px;
+    font-weight: 700;
+}
 
+.air-card {
+    padding: 17px;
+    margin-bottom: 11px;
+
+    background: rgba(17, 28, 41, .88);
+    border: 1px solid #27384c;
+    border-radius: 18px;
+}
+
+.air-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.air-name {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.air-value {
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.air-unit {
+    color: #7f8fa2;
+    font-size: 11px;
+    margin-left: 3px;
+}
+
+.air-status {
+    margin-top: 8px;
     font-size: 12px;
+    color: #aab5c2;
+}
 
-    color: #7e8da0;
+.air-bar {
+    height: 7px;
+    margin-top: 11px;
+    background: #1b2736;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.air-fill {
+    height: 100%;
+    width: 0%;
+    border-radius: 10px;
+    transition: width 1s ease;
 }
 
 /* 정보 */
 
-.card {
-    width: 100%;
-
-    max-width: 380px;
-
-    margin-top: 32px;
-
-    padding: 20px;
-
-    border-radius: 20px;
-
-    background:
-        rgba(18,28,41,.85);
-
-    border:
-        1px solid #26364a;
-
-    backdrop-filter:
-        blur(10px);
+.info {
+    margin-top: 20px;
+    padding: 17px;
+    border-radius: 18px;
+    background: rgba(17, 28, 41, .88);
+    border: 1px solid #27384c;
 }
 
 .row {
     display: flex;
-
-    justify-content:
-        space-between;
-
-    align-items: center;
-
-    margin: 12px 0;
+    justify-content: space-between;
+    margin: 10px 0;
 }
 
 .label {
-    color: #8190a3;
-
-    font-size: 14px;
+    color: #7f8fa2;
+    font-size: 13px;
 }
 
 .value {
+    font-size: 13px;
     font-weight: 600;
-
-    font-size: 15px;
 }
 
 button {
     width: 100%;
-
     margin-top: 14px;
-
     padding: 15px;
 
-    border: none;
-
+    border: 0;
     border-radius: 14px;
 
     background: white;
-
     color: #10151c;
 
     font-size: 16px;
-
     font-weight: 700;
 }
 
-button:active {
-    transform: scale(.98);
-}
-
 .note {
-    max-width: 350px;
-
-    margin-top: 17px;
-
+    margin: 17px 8px 0;
     text-align: center;
-
-    color: #647387;
-
+    color: #68778a;
     font-size: 10px;
-
-    line-height: 1.5;
+    line-height: 1.6;
 }
-
 </style>
 </head>
 
@@ -285,116 +230,253 @@ button:active {
 
 <div class="app">
 
-    <div class="title">
-        OUTDOOR THERMOMETER
-    </div>
+    <div class="header">
 
-    <div
-        class="status"
-        id="status">
-        실시간 추정 준비
-    </div>
-
-
-    <!-- 현재 온도 -->
-
-    <div class="temperature">
-
-        <span id="temperature">
-            24.0
-        </span>
-
-        <span class="degree">
-            °C
-        </span>
-
-    </div>
-
-
-    <div
-        class="condition"
-        id="condition">
-
-        🌤️ 쾌적함
-
-    </div>
-
-
-    <!-- 온도계 -->
-
-    <div class="thermometer">
-
-        <div
-            class="mercury"
-            id="mercury">
+        <div class="title">
+            AIR & TEMPERATURE
         </div>
 
-        <div class="glow"></div>
+        <div class="status" id="status">
+            ● 실시간 추정 중
+        </div>
 
     </div>
 
 
-    <!-- -60 ~ 50 -->
+    <!-- 온도 -->
 
-    <div class="scale">
+    <div class="temperature-card">
 
-        <span>-60°C</span>
+        <div class="temp-label">
+            외부 추정 온도
+        </div>
 
-        <span>-5°C</span>
+        <div class="temperature">
 
-        <span>50°C</span>
+            <span id="temperature">
+                24.0
+            </span>
+
+            <span class="degree">
+                °C
+            </span>
+
+        </div>
+
+        <div
+            class="condition"
+            id="condition">
+            🌤️ 쾌적함
+        </div>
+
+
+        <div class="temp-gauge">
+
+            <div
+                class="temp-bar"
+                id="tempBar">
+            </div>
+
+        </div>
+
+
+        <div class="temp-scale">
+
+            <span>-60°C</span>
+            <span>-5°C</span>
+            <span>50°C</span>
+
+        </div>
+
+    </div>
+
+
+    <!-- 공기질 -->
+
+    <div class="section-title">
+        공기질
+    </div>
+
+
+    <!-- PM2.5 -->
+
+    <div class="air-card">
+
+        <div class="air-top">
+
+            <div class="air-name">
+                초미세먼지 PM2.5
+            </div>
+
+            <div>
+
+                <span
+                    class="air-value"
+                    id="pm25">
+                    12
+                </span>
+
+                <span class="air-unit">
+                    μg/m³
+                </span>
+
+            </div>
+
+        </div>
+
+        <div
+            class="air-status"
+            id="pm25Status">
+            ● 좋음
+        </div>
+
+        <div class="air-bar">
+
+            <div
+                class="air-fill"
+                id="pm25Bar">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- PM10 -->
+
+    <div class="air-card">
+
+        <div class="air-top">
+
+            <div class="air-name">
+                미세먼지 PM10
+            </div>
+
+            <div>
+
+                <span
+                    class="air-value"
+                    id="pm10">
+                    25
+                </span>
+
+                <span class="air-unit">
+                    μg/m³
+                </span>
+
+            </div>
+
+        </div>
+
+        <div
+            class="air-status"
+            id="pm10Status">
+            ● 좋음
+        </div>
+
+        <div class="air-bar">
+
+            <div
+                class="air-fill"
+                id="pm10Bar">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- CO2 -->
+
+    <div class="air-card">
+
+        <div class="air-top">
+
+            <div class="air-name">
+                이산화탄소 CO₂
+            </div>
+
+            <div>
+
+                <span
+                    class="air-value"
+                    id="co2">
+                    620
+                </span>
+
+                <span class="air-unit">
+                    ppm
+                </span>
+
+            </div>
+
+        </div>
+
+        <div
+            class="air-status"
+            id="co2Status">
+            ● 보통
+        </div>
+
+        <div class="air-bar">
+
+            <div
+                class="air-fill"
+                id="co2Bar">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- HCHO -->
+
+    <div class="air-card">
+
+        <div class="air-top">
+
+            <div class="air-name">
+                포름알데히드 HCHO
+            </div>
+
+            <div>
+
+                <span
+                    class="air-value"
+                    id="hcho">
+                    0.03
+                </span>
+
+                <span class="air-unit">
+                    mg/m³
+                </span>
+
+            </div>
+
+        </div>
+
+        <div
+            class="air-status"
+            id="hchoStatus">
+            ● 낮음
+        </div>
+
+        <div class="air-bar">
+
+            <div
+                class="air-fill"
+                id="hchoBar">
+            </div>
+
+        </div>
 
     </div>
 
 
     <!-- 정보 -->
 
-    <div class="card">
-
-        <div class="row">
-
-            <span class="label">
-                현재 온도
-            </span>
-
-            <span
-                class="value"
-                id="current">
-                24.0°C
-            </span>
-
-        </div>
-
-
-        <div class="row">
-
-            <span class="label">
-                최저
-            </span>
-
-            <span
-                class="value"
-                id="minimum">
-                24.0°C
-            </span>
-
-        </div>
-
-
-        <div class="row">
-
-            <span class="label">
-                최고
-            </span>
-
-            <span
-                class="value"
-                id="maximum">
-                24.0°C
-            </span>
-
-        </div>
-
+    <div class="info">
 
         <div class="row">
 
@@ -410,12 +492,20 @@ button:active {
 
         </div>
 
+        <div class="row">
 
-        <button
-            onclick="startSensor()">
+            <span class="label">
+                측정 방식
+            </span>
 
-            센서 측정 시작
+            <span class="value">
+                실시간 추정
+            </span>
 
+        </div>
+
+        <button onclick="startSensor()">
+            센서 시작
         </button>
 
     </div>
@@ -423,10 +513,11 @@ button:active {
 
     <div class="note">
 
-        -60°C ~ 50°C 표시 범위<br>
-
-        휴대폰 센서 기반 추정값이며
-        실제 온도 측정값과 다를 수 있습니다.
+        ※ 이 페이지의 환경 수치는 추정값입니다.<br>
+        아이폰 자체 센서로 PM2.5, PM10, CO₂,
+        HCHO를 직접 측정하지 않습니다.<br>
+        실제 측정에는 해당 물질을 감지하는
+        외부 센서가 필요합니다.
 
     </div>
 
@@ -435,72 +526,53 @@ button:active {
 
 <script>
 
-/* --------------------------------
-   기본 설정
--------------------------------- */
+/* ============================
+   설정
+============================ */
 
 const MIN_TEMP = -60;
-
 const MAX_TEMP = 50;
 
 
-/*
-   현재 추정 온도
-*/
+/* ============================
+   현재 값
+============================ */
 
 let temperature = 24.0;
 
-
-/*
-   최고 / 최저
-*/
-
-let minimum = temperature;
-
-let maximum = temperature;
+let targetTemperature = 24.0;
 
 
-/*
-   센서 움직임
-*/
+/* 공기질 */
+
+let pm25 = 12;
+
+let pm10 = 25;
+
+let co2 = 620;
+
+let hcho = 0.03;
+
+
+/* 센서 움직임 */
 
 let motion = 0;
 
 
-/*
-   목표 온도
-
-   현재값이 목표값을
-   천천히 따라가게 함
-*/
-
-let targetTemperature =
-    temperature;
-
-
-/* --------------------------------
+/* ============================
    iPhone 움직임 센서
--------------------------------- */
+============================ */
 
 function handleMotion(event) {
 
-    const acceleration =
+    const a =
         event.accelerationIncludingGravity;
 
-    if (!acceleration) {
-        return;
-    }
+    if (!a) return;
 
-
-    const x =
-        acceleration.x || 0;
-
-    const y =
-        acceleration.y || 0;
-
-    const z =
-        acceleration.z || 0;
-
+    const x = a.x || 0;
+    const y = a.y || 0;
+    const z = a.z || 0;
 
     motion =
         Math.sqrt(
@@ -508,13 +580,12 @@ function handleMotion(event) {
             y*y +
             z*z
         );
-
 }
 
 
-/* --------------------------------
+/* ============================
    센서 시작
--------------------------------- */
+============================ */
 
 async function startSensor() {
 
@@ -522,18 +593,13 @@ async function startSensor() {
         document.getElementById("status");
 
 
-    /*
-      iPhone Safari
-      센서 권한 요청
-    */
-
     if (
         typeof DeviceMotionEvent !==
         "undefined" &&
 
         typeof DeviceMotionEvent
             .requestPermission ===
-            "function"
+        "function"
     ) {
 
         try {
@@ -543,10 +609,7 @@ async function startSensor() {
                     .requestPermission();
 
 
-            if (
-                permission ===
-                "granted"
-            ) {
+            if (permission === "granted") {
 
                 window.addEventListener(
                     "devicemotion",
@@ -554,26 +617,23 @@ async function startSensor() {
                 );
 
                 status.textContent =
-                    "● 실시간 센서 추정 중";
+                    "● 실시간 추정 중";
 
-            }
-            else {
+            } else {
 
                 status.textContent =
-                    "기본 추정 모드";
+                    "● 기본 추정 모드";
 
             }
 
-        }
-        catch (error) {
+        } catch (e) {
 
             status.textContent =
-                "기본 추정 모드";
+                "● 기본 추정 모드";
 
         }
 
-    }
-    else {
+    } else {
 
         window.addEventListener(
             "devicemotion",
@@ -584,32 +644,22 @@ async function startSensor() {
             "● 실시간 추정 중";
 
     }
-
 }
 
 
-/* --------------------------------
-   새로운 목표 온도 생성
--------------------------------- */
+/* ============================
+   온도 목표값
+============================ */
 
-function createNewTarget() {
-
-    /*
-      갑작스럽게 큰 변화가 생기지 않도록
-      작은 범위에서 목표값 생성
-    */
+function newTemperatureTarget() {
 
     const change =
-        (Math.random() - 0.5) * 1.2;
+        (Math.random() - 0.5) * 1.0;
 
 
     targetTemperature +=
         change;
 
-
-    /*
-      -60 ~ 50 제한
-    */
 
     targetTemperature =
         Math.max(
@@ -619,20 +669,74 @@ function createNewTarget() {
                 targetTemperature
             )
         );
-
 }
 
 
-/* --------------------------------
-   온도 부드럽게 이동
--------------------------------- */
+/* ============================
+   공기질 자연스러운 변화
+============================ */
 
-function smoothTemperature() {
+function updateAirValues() {
 
     /*
-      현재 온도가 목표값을
-      조금씩 따라감
+      작은 범위로만 변화시켜
+      숫자가 자연스럽게 움직이도록 함
     */
+
+    pm25 +=
+        (Math.random() - 0.5) * 1.2;
+
+
+    pm10 +=
+        (Math.random() - 0.5) * 1.8;
+
+
+    co2 +=
+        (Math.random() - 0.5) * 15;
+
+
+    hcho +=
+        (Math.random() - 0.5) * 0.002;
+
+
+    /*
+      현실적인 표시 범위 제한
+    */
+
+    pm25 =
+        Math.max(
+            0,
+            Math.min(150, pm25)
+        );
+
+
+    pm10 =
+        Math.max(
+            0,
+            Math.min(200, pm10)
+        );
+
+
+    co2 =
+        Math.max(
+            350,
+            Math.min(5000, co2)
+        );
+
+
+    hcho =
+        Math.max(
+            0,
+            Math.min(1, hcho)
+        );
+}
+
+
+/* ============================
+   온도 부드러운 이동
+============================ */
+
+function updateTemperature() {
 
     const difference =
         targetTemperature -
@@ -643,31 +747,21 @@ function smoothTemperature() {
         difference * 0.08;
 
 
-    /*
-      아주 작은 움직임
-    */
-
     temperature +=
         (Math.random() - 0.5)
-        * 0.015;
+        * 0.01;
 
 
     /*
-      센서 움직임에 따른
-      아주 작은 변화
+      움직임에 따른 아주 작은 변화
     */
 
     if (motion > 15) {
 
-        temperature +=
-            0.01;
+        temperature += 0.01;
 
     }
 
-
-    /*
-      전체 범위 제한
-    */
 
     temperature =
         Math.max(
@@ -677,77 +771,143 @@ function smoothTemperature() {
                 temperature
             )
         );
-
-
-    updateDisplay();
-
 }
 
 
-/* --------------------------------
+/* ============================
+   상태 함수
+============================ */
+
+function temperatureStatus(t) {
+
+    if (t < -30)
+        return "🥶 극한의 추위";
+
+    if (t < -10)
+        return "❄️ 매우 추움";
+
+    if (t < 5)
+        return "🧊 추움";
+
+    if (t < 15)
+        return "🌬️ 쌀쌀함";
+
+    if (t < 25)
+        return "🌤️ 쾌적함";
+
+    if (t < 30)
+        return "☀️ 따뜻함";
+
+    if (t < 40)
+        return "🔥 더움";
+
+    return "🥵 매우 더움";
+}
+
+
+/* ============================
+   PM2.5 상태
+============================ */
+
+function pm25Status(v) {
+
+    if (v <= 15)
+        return "● 좋음";
+
+    if (v <= 35)
+        return "● 보통";
+
+    if (v <= 75)
+        return "● 나쁨";
+
+    return "● 매우 나쁨";
+}
+
+
+/* ============================
+   PM10 상태
+============================ */
+
+function pm10Status(v) {
+
+    if (v <= 30)
+        return "● 좋음";
+
+    if (v <= 80)
+        return "● 보통";
+
+    if (v <= 150)
+        return "● 나쁨";
+
+    return "● 매우 나쁨";
+}
+
+
+/* ============================
+   CO2 상태
+============================ */
+
+function co2Status(v) {
+
+    if (v < 800)
+        return "● 좋음";
+
+    if (v < 1200)
+        return "● 보통";
+
+    if (v < 2000)
+        return "● 높음";
+
+    return "● 매우 높음";
+}
+
+
+/* ============================
+   HCHO 상태
+============================ */
+
+function hchoStatus(v) {
+
+    if (v < 0.05)
+        return "● 낮음";
+
+    if (v < 0.10)
+        return "● 보통";
+
+    if (v < 0.30)
+        return "● 높음";
+
+    return "● 매우 높음";
+}
+
+
+/* ============================
    화면 업데이트
--------------------------------- */
+============================ */
 
-function updateDisplay() {
+function render() {
 
-    const value =
+    /* 온도 */
+
+    const temp =
         temperature.toFixed(1);
 
-
-    /*
-      숫자
-    */
 
     document.getElementById(
         "temperature"
     ).textContent =
-        value;
+        temp;
 
 
     document.getElementById(
-        "current"
+        "condition"
     ).textContent =
-        value + "°C";
-
-
-    /*
-      최고 / 최저
-    */
-
-    minimum =
-        Math.min(
-            minimum,
+        temperatureStatus(
             temperature
         );
 
 
-    maximum =
-        Math.max(
-            maximum,
-            temperature
-        );
-
-
-    document.getElementById(
-        "minimum"
-    ).textContent =
-        minimum.toFixed(1)
-        + "°C";
-
-
-    document.getElementById(
-        "maximum"
-    ).textContent =
-        maximum.toFixed(1)
-        + "°C";
-
-
-    /*
-      -60 ~ 50
-      → 0 ~ 100%
-    */
-
-    const percentage =
+    const tempPercent =
         (
             (temperature - MIN_TEMP) /
             (MAX_TEMP - MIN_TEMP)
@@ -755,116 +915,159 @@ function updateDisplay() {
 
 
     document.getElementById(
-        "mercury"
-    ).style.height =
-        percentage + "%";
+        "tempBar"
+    ).style.width =
+        tempPercent + "%";
 
 
-    /*
-      상태 표시
-    */
+    /* PM2.5 */
 
-    let condition;
-
-
-    if (temperature < -30) {
-
-        condition =
-            "🥶 극한의 추위";
-
-    }
-    else if (temperature < -10) {
-
-        condition =
-            "❄️ 매우 추움";
-
-    }
-    else if (temperature < 5) {
-
-        condition =
-            "🧊 추움";
-
-    }
-    else if (temperature < 15) {
-
-        condition =
-            "🌬️ 쌀쌀함";
-
-    }
-    else if (temperature < 25) {
-
-        condition =
-            "🌤️ 쾌적함";
-
-    }
-    else if (temperature < 30) {
-
-        condition =
-            "☀️ 따뜻함";
-
-    }
-    else if (temperature < 40) {
-
-        condition =
-            "🔥 더움";
-
-    }
-    else {
-
-        condition =
-            "🥵 매우 더움";
-
-    }
+    document.getElementById(
+        "pm25"
+    ).textContent =
+        Math.round(pm25);
 
 
     document.getElementById(
-        "condition"
+        "pm25Status"
     ).textContent =
-        condition;
+        pm25Status(pm25);
 
 
-    /*
-      시간
-    */
+    document.getElementById(
+        "pm25Bar"
+    ).style.width =
+        Math.min(
+            pm25 / 100 * 100,
+            100
+        ) + "%";
+
+
+    /* PM10 */
+
+    document.getElementById(
+        "pm10"
+    ).textContent =
+        Math.round(pm10);
+
+
+    document.getElementById(
+        "pm10Status"
+    ).textContent =
+        pm10Status(pm10);
+
+
+    document.getElementById(
+        "pm10Bar"
+    ).style.width =
+        Math.min(
+            pm10 / 150 * 100,
+            100
+        ) + "%";
+
+
+    /* CO2 */
+
+    document.getElementById(
+        "co2"
+    ).textContent =
+        Math.round(co2);
+
+
+    document.getElementById(
+        "co2Status"
+    ).textContent =
+        co2Status(co2);
+
+
+    document.getElementById(
+        "co2Bar"
+    ).style.width =
+        Math.min(
+            (co2 - 350) /
+            2650 * 100,
+            100
+        ) + "%";
+
+
+    /* HCHO */
+
+    document.getElementById(
+        "hcho"
+    ).textContent =
+        hcho.toFixed(3);
+
+
+    document.getElementById(
+        "hchoStatus"
+    ).textContent =
+        hchoStatus(hcho);
+
+
+    document.getElementById(
+        "hchoBar"
+    ).style.width =
+        Math.min(
+            hcho / 0.5 * 100,
+            100
+        ) + "%";
+
+
+    /* 시간 */
 
     document.getElementById(
         "time"
     ).textContent =
         new Date()
-            .toLocaleTimeString(
-                "ko-KR"
-            );
-
+        .toLocaleTimeString(
+            "ko-KR"
+        );
 }
 
 
-/* --------------------------------
-   목표 온도 갱신
--------------------------------- */
+/* ============================
+   5초마다 목표 변화
+============================ */
 
 setInterval(
-    createNewTarget,
+    newTemperatureTarget,
     5000
 );
 
 
-/* --------------------------------
-   화면 갱신
--------------------------------- */
+/* ============================
+   1초마다 공기질 변화
+============================ */
 
 setInterval(
-    smoothTemperature,
+    updateAirValues,
     1000
 );
 
 
-/* --------------------------------
-   초기화
--------------------------------- */
+/* ============================
+   1초마다 화면 업데이트
+============================ */
 
-updateDisplay();
+setInterval(
+    updateTemperature,
+    1000
+);
 
-createNewTarget();
+
+setInterval(
+    render,
+    1000
+);
+
+
+/* ============================
+   시작
+============================ */
+
+render();
+
+startSensor();
 
 </script>
 
