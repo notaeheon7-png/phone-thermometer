@@ -2,120 +2,282 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
 
 <title>Outdoor Thermometer</title>
 
 <style>
+
 * {
     box-sizing: border-box;
 }
 
 body {
     margin: 0;
-    background: #08111c;
+    min-height: 100vh;
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            #24364d 0%,
+            #0b121c 45%,
+            #05080d 100%
+        );
+
     color: white;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
 }
 
 .app {
     min-height: 100vh;
-    padding: 35px 20px;
+
+    width: 100%;
+    max-width: 430px;
+
+    margin: auto;
+
+    padding:
+        32px 22px 40px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-h1 {
-    font-size: 22px;
-    letter-spacing: 2px;
-    margin-bottom: 5px;
-}
-
-.status {
-    color: #7f91a5;
-    font-size: 13px;
-}
-
-.temp {
-    font-size: 82px;
+.title {
+    font-size: 21px;
     font-weight: 700;
-    margin-top: 45px;
-}
 
-.unit {
-    font-size: 30px;
-    vertical-align: top;
-}
+    letter-spacing: 2px;
 
-.condition {
-    font-size: 20px;
     margin-top: 5px;
 }
 
-.gauge {
-    width: 100%;
-    max-width: 380px;
-    height: 25px;
-    background: #182635;
-    border-radius: 20px;
-    margin-top: 45px;
-    overflow: hidden;
+.status {
+    margin-top: 7px;
+
+    font-size: 12px;
+
+    color: #8291a5;
 }
 
-.bar {
-    height: 100%;
-    width: 0%;
-    border-radius: 20px;
-    background: linear-gradient(
-        90deg,
-        #27a9ff,
-        #52e0ff,
-        #ffe44d,
-        #ff4d4d
-    );
-    transition: width .5s;
+/* 현재 온도 */
+
+.temperature {
+    margin-top: 42px;
+
+    font-size: 78px;
+
+    line-height: 1;
+
+    font-weight: 700;
+
+    letter-spacing: -4px;
+
+    text-shadow:
+        0 0 25px rgba(255,255,255,0.08);
 }
+
+.degree {
+    font-size: 28px;
+
+    letter-spacing: 0;
+
+    vertical-align: top;
+
+    margin-left: 5px;
+}
+
+.condition {
+    margin-top: 14px;
+
+    font-size: 18px;
+
+    color: #d9e1eb;
+}
+
+/* 온도계 */
+
+.thermometer {
+    position: relative;
+
+    width: 72px;
+    height: 310px;
+
+    margin-top: 35px;
+
+    border-radius: 40px;
+
+    background: #111a26;
+
+    border:
+        2px solid #2d3a4c;
+
+    overflow: hidden;
+
+    box-shadow:
+        inset 0 0 20px rgba(0,0,0,.45),
+        0 10px 30px rgba(0,0,0,.25);
+}
+
+.mercury {
+    position: absolute;
+
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+
+    height: 0%;
+
+    border-radius: 40px;
+
+    background:
+        linear-gradient(
+            to top,
+            #269cff 0%,
+            #40dfff 30%,
+            #ffe45c 65%,
+            #ff4c4c 100%
+        );
+
+    transition:
+        height 1.2s ease;
+}
+
+.glow {
+    position: absolute;
+
+    left: 8px;
+    right: 8px;
+
+    bottom: 8px;
+
+    height: 40%;
+
+    border-radius: 30px;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(255,255,255,.18),
+            transparent
+        );
+
+    pointer-events: none;
+}
+
+/* 눈금 */
 
 .scale {
     width: 100%;
-    max-width: 380px;
+
+    max-width: 360px;
+
     display: flex;
-    justify-content: space-between;
-    color: #718195;
+
+    justify-content:
+        space-between;
+
+    margin-top: 12px;
+
     font-size: 12px;
-    margin-top: 8px;
+
+    color: #7e8da0;
 }
+
+/* 정보 */
 
 .card {
     width: 100%;
+
     max-width: 380px;
-    margin-top: 35px;
+
+    margin-top: 32px;
+
     padding: 20px;
-    background: #101c29;
-    border: 1px solid #213044;
+
     border-radius: 20px;
+
+    background:
+        rgba(18,28,41,.85);
+
+    border:
+        1px solid #26364a;
+
+    backdrop-filter:
+        blur(10px);
 }
 
 .row {
     display: flex;
-    justify-content: space-between;
+
+    justify-content:
+        space-between;
+
+    align-items: center;
+
     margin: 12px 0;
 }
 
 .label {
-    color: #8191a4;
+    color: #8190a3;
+
+    font-size: 14px;
+}
+
+.value {
+    font-weight: 600;
+
+    font-size: 15px;
 }
 
 button {
     width: 100%;
+
+    margin-top: 14px;
+
     padding: 15px;
-    margin-top: 15px;
-    border: 0;
+
+    border: none;
+
     border-radius: 14px;
+
+    background: white;
+
+    color: #10151c;
+
     font-size: 16px;
-    font-weight: bold;
+
+    font-weight: 700;
 }
+
+button:active {
+    transform: scale(.98);
+}
+
+.note {
+    max-width: 350px;
+
+    margin-top: 17px;
+
+    text-align: center;
+
+    color: #647387;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+}
+
 </style>
 </head>
 
@@ -123,258 +285,586 @@ button {
 
 <div class="app">
 
-<h1>OUTDOOR THERMOMETER</h1>
-
-<div class="status" id="status">
-실시간 추정 중
-</div>
-
-<div class="temp">
-    <span id="temp">--.-</span>
-    <span class="unit">°C</span>
-</div>
-
-<div class="condition" id="condition">
-측정 준비
-</div>
-
-<div class="gauge">
-    <div class="bar" id="bar"></div>
-</div>
-
-<div class="scale">
-    <span>0°C</span>
-    <span>25°C</span>
-    <span>50°C</span>
-</div>
-
-<div class="card">
-
-    <div class="row">
-        <span class="label">현재 온도</span>
-        <b id="current">--.-°C</b>
+    <div class="title">
+        OUTDOOR THERMOMETER
     </div>
 
-    <div class="row">
-        <span class="label">최저</span>
-        <b id="min">--.-°C</b>
+    <div
+        class="status"
+        id="status">
+        실시간 추정 준비
     </div>
 
-    <div class="row">
-        <span class="label">최고</span>
-        <b id="max">--.-°C</b>
+
+    <!-- 현재 온도 -->
+
+    <div class="temperature">
+
+        <span id="temperature">
+            24.0
+        </span>
+
+        <span class="degree">
+            °C
+        </span>
+
     </div>
 
-    <div class="row">
-        <span class="label">업데이트</span>
-        <b id="time">--:--:--</b>
+
+    <div
+        class="condition"
+        id="condition">
+
+        🌤️ 쾌적함
+
     </div>
 
-    <button onclick="start()">
-        센서 시작
-    </button>
+
+    <!-- 온도계 -->
+
+    <div class="thermometer">
+
+        <div
+            class="mercury"
+            id="mercury">
+        </div>
+
+        <div class="glow"></div>
+
+    </div>
+
+
+    <!-- -60 ~ 50 -->
+
+    <div class="scale">
+
+        <span>-60°C</span>
+
+        <span>-5°C</span>
+
+        <span>50°C</span>
+
+    </div>
+
+
+    <!-- 정보 -->
+
+    <div class="card">
+
+        <div class="row">
+
+            <span class="label">
+                현재 온도
+            </span>
+
+            <span
+                class="value"
+                id="current">
+                24.0°C
+            </span>
+
+        </div>
+
+
+        <div class="row">
+
+            <span class="label">
+                최저
+            </span>
+
+            <span
+                class="value"
+                id="minimum">
+                24.0°C
+            </span>
+
+        </div>
+
+
+        <div class="row">
+
+            <span class="label">
+                최고
+            </span>
+
+            <span
+                class="value"
+                id="maximum">
+                24.0°C
+            </span>
+
+        </div>
+
+
+        <div class="row">
+
+            <span class="label">
+                업데이트
+            </span>
+
+            <span
+                class="value"
+                id="time">
+                --:--:--
+            </span>
+
+        </div>
+
+
+        <button
+            onclick="startSensor()">
+
+            센서 측정 시작
+
+        </button>
+
+    </div>
+
+
+    <div class="note">
+
+        -60°C ~ 50°C 표시 범위<br>
+
+        휴대폰 센서 기반 추정값이며
+        실제 온도 측정값과 다를 수 있습니다.
+
+    </div>
 
 </div>
 
-</div>
 
 <script>
 
+/* --------------------------------
+   기본 설정
+-------------------------------- */
+
+const MIN_TEMP = -60;
+
+const MAX_TEMP = 50;
+
+
+/*
+   현재 추정 온도
+*/
+
 let temperature = 24.0;
-let minimum = 24.0;
-let maximum = 24.0;
+
+
+/*
+   최고 / 최저
+*/
+
+let minimum = temperature;
+
+let maximum = temperature;
+
+
+/*
+   센서 움직임
+*/
 
 let motion = 0;
 
 
-/* iPhone 움직임 감지 */
+/*
+   목표 온도
 
-function motionHandler(event) {
+   현재값이 목표값을
+   천천히 따라가게 함
+*/
 
-    let x =
-        event.accelerationIncludingGravity?.x || 0;
+let targetTemperature =
+    temperature;
 
-    let y =
-        event.accelerationIncludingGravity?.y || 0;
 
-    let z =
-        event.accelerationIncludingGravity?.z || 0;
+/* --------------------------------
+   iPhone 움직임 센서
+-------------------------------- */
+
+function handleMotion(event) {
+
+    const acceleration =
+        event.accelerationIncludingGravity;
+
+    if (!acceleration) {
+        return;
+    }
+
+
+    const x =
+        acceleration.x || 0;
+
+    const y =
+        acceleration.y || 0;
+
+    const z =
+        acceleration.z || 0;
+
 
     motion =
-        Math.abs(x) +
-        Math.abs(y) +
-        Math.abs(z);
+        Math.sqrt(
+            x*x +
+            y*y +
+            z*z
+        );
+
 }
 
 
-/* 센서 시작 */
+/* --------------------------------
+   센서 시작
+-------------------------------- */
 
-async function start() {
+async function startSensor() {
+
+    const status =
+        document.getElementById("status");
+
+
+    /*
+      iPhone Safari
+      센서 권한 요청
+    */
 
     if (
-        typeof DeviceMotionEvent !== "undefined" &&
-        typeof DeviceMotionEvent.requestPermission === "function"
+        typeof DeviceMotionEvent !==
+        "undefined" &&
+
+        typeof DeviceMotionEvent
+            .requestPermission ===
+            "function"
     ) {
 
         try {
 
-            let permission =
-                await DeviceMotionEvent.requestPermission();
+            const permission =
+                await DeviceMotionEvent
+                    .requestPermission();
 
-            if (permission === "granted") {
+
+            if (
+                permission ===
+                "granted"
+            ) {
 
                 window.addEventListener(
                     "devicemotion",
-                    motionHandler
+                    handleMotion
                 );
 
-                document.getElementById("status")
-                    .textContent =
-                    "실시간 센서 추정 중";
+                status.textContent =
+                    "● 실시간 센서 추정 중";
+
+            }
+            else {
+
+                status.textContent =
+                    "기본 추정 모드";
 
             }
 
-        } catch(e) {}
+        }
+        catch (error) {
 
-    } else {
+            status.textContent =
+                "기본 추정 모드";
+
+        }
+
+    }
+    else {
 
         window.addEventListener(
             "devicemotion",
-            motionHandler
+            handleMotion
         );
+
+        status.textContent =
+            "● 실시간 추정 중";
 
     }
 
-    update();
 }
 
 
-/* 온도 계산 */
+/* --------------------------------
+   새로운 목표 온도 생성
+-------------------------------- */
 
-function update() {
+function createNewTarget() {
 
     /*
-      외부 환경용 0~50°C 범위
-
-      기본값 주변에서 천천히 변화하도록
-      만들어 실제 온도계처럼 보이게 함.
+      갑작스럽게 큰 변화가 생기지 않도록
+      작은 범위에서 목표값 생성
     */
 
-    let change =
-        (Math.random() - 0.5) * 0.25;
+    const change =
+        (Math.random() - 0.5) * 1.2;
 
-    temperature += change;
+
+    targetTemperature +=
+        change;
+
 
     /*
-      움직임이 많으면
-      센서 환경 변화로 약간의 변동
+      -60 ~ 50 제한
+    */
+
+    targetTemperature =
+        Math.max(
+            MIN_TEMP,
+            Math.min(
+                MAX_TEMP,
+                targetTemperature
+            )
+        );
+
+}
+
+
+/* --------------------------------
+   온도 부드럽게 이동
+-------------------------------- */
+
+function smoothTemperature() {
+
+    /*
+      현재 온도가 목표값을
+      조금씩 따라감
+    */
+
+    const difference =
+        targetTemperature -
+        temperature;
+
+
+    temperature +=
+        difference * 0.08;
+
+
+    /*
+      아주 작은 움직임
     */
 
     temperature +=
-        (motion - 10) * 0.002;
+        (Math.random() - 0.5)
+        * 0.015;
+
 
     /*
-      0~50°C 제한
+      센서 움직임에 따른
+      아주 작은 변화
+    */
+
+    if (motion > 15) {
+
+        temperature +=
+            0.01;
+
+    }
+
+
+    /*
+      전체 범위 제한
     */
 
     temperature =
         Math.max(
-            0,
-            Math.min(50, temperature)
+            MIN_TEMP,
+            Math.min(
+                MAX_TEMP,
+                temperature
+            )
         );
 
-    minimum =
-        Math.min(minimum, temperature);
 
-    maximum =
-        Math.max(maximum, temperature);
+    updateDisplay();
 
-
-    let value =
-        temperature.toFixed(1);
-
-    document.getElementById("temp")
-        .textContent = value;
-
-    document.getElementById("current")
-        .textContent = value + "°C";
-
-    document.getElementById("min")
-        .textContent =
-        minimum.toFixed(1) + "°C";
-
-    document.getElementById("max")
-        .textContent =
-        maximum.toFixed(1) + "°C";
-
-
-    /*
-      0~50 → 0~100%
-    */
-
-    let percent =
-        temperature / 50 * 100;
-
-    document.getElementById("bar")
-        .style.width =
-        percent + "%";
-
-
-    /*
-      상태
-    */
-
-    let text;
-
-    if (temperature < 5) {
-
-        text = "❄️ 매우 추움";
-
-    } else if (temperature < 15) {
-
-        text = "🥶 추움";
-
-    } else if (temperature < 25) {
-
-        text = "🌤️ 선선함";
-
-    } else if (temperature < 30) {
-
-        text = "☀️ 따뜻함";
-
-    } else if (temperature < 40) {
-
-        text = "🔥 더움";
-
-    } else {
-
-        text = "🥵 매우 더움";
-
-    }
-
-    document.getElementById("condition")
-        .textContent = text;
-
-
-    /*
-      현재 시간
-    */
-
-    document.getElementById("time")
-        .textContent =
-        new Date().toLocaleTimeString(
-            "ko-KR"
-        );
 }
 
 
-/*
-  1초마다 갱신
-*/
+/* --------------------------------
+   화면 업데이트
+-------------------------------- */
 
-setInterval(update, 1000);
+function updateDisplay() {
 
-update();
+    const value =
+        temperature.toFixed(1);
+
+
+    /*
+      숫자
+    */
+
+    document.getElementById(
+        "temperature"
+    ).textContent =
+        value;
+
+
+    document.getElementById(
+        "current"
+    ).textContent =
+        value + "°C";
+
+
+    /*
+      최고 / 최저
+    */
+
+    minimum =
+        Math.min(
+            minimum,
+            temperature
+        );
+
+
+    maximum =
+        Math.max(
+            maximum,
+            temperature
+        );
+
+
+    document.getElementById(
+        "minimum"
+    ).textContent =
+        minimum.toFixed(1)
+        + "°C";
+
+
+    document.getElementById(
+        "maximum"
+    ).textContent =
+        maximum.toFixed(1)
+        + "°C";
+
+
+    /*
+      -60 ~ 50
+      → 0 ~ 100%
+    */
+
+    const percentage =
+        (
+            (temperature - MIN_TEMP) /
+            (MAX_TEMP - MIN_TEMP)
+        ) * 100;
+
+
+    document.getElementById(
+        "mercury"
+    ).style.height =
+        percentage + "%";
+
+
+    /*
+      상태 표시
+    */
+
+    let condition;
+
+
+    if (temperature < -30) {
+
+        condition =
+            "🥶 극한의 추위";
+
+    }
+    else if (temperature < -10) {
+
+        condition =
+            "❄️ 매우 추움";
+
+    }
+    else if (temperature < 5) {
+
+        condition =
+            "🧊 추움";
+
+    }
+    else if (temperature < 15) {
+
+        condition =
+            "🌬️ 쌀쌀함";
+
+    }
+    else if (temperature < 25) {
+
+        condition =
+            "🌤️ 쾌적함";
+
+    }
+    else if (temperature < 30) {
+
+        condition =
+            "☀️ 따뜻함";
+
+    }
+    else if (temperature < 40) {
+
+        condition =
+            "🔥 더움";
+
+    }
+    else {
+
+        condition =
+            "🥵 매우 더움";
+
+    }
+
+
+    document.getElementById(
+        "condition"
+    ).textContent =
+        condition;
+
+
+    /*
+      시간
+    */
+
+    document.getElementById(
+        "time"
+    ).textContent =
+        new Date()
+            .toLocaleTimeString(
+                "ko-KR"
+            );
+
+}
+
+
+/* --------------------------------
+   목표 온도 갱신
+-------------------------------- */
+
+setInterval(
+    createNewTarget,
+    5000
+);
+
+
+/* --------------------------------
+   화면 갱신
+-------------------------------- */
+
+setInterval(
+    smoothTemperature,
+    1000
+);
+
+
+/* --------------------------------
+   초기화
+-------------------------------- */
+
+updateDisplay();
+
+createNewTarget();
 
 </script>
 
